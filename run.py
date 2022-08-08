@@ -16,7 +16,7 @@ price = SHEET.worksheet('Price')
 select = input("Please select a calculator mode, Type renewal or currency: ")
 product = input("Please select your product, Toad or Kace: ")
 level = input("Please select support level, standard, mid, premier: ")
-pricuplift = int(input("Please enter the price to uplift: "))e_
+price_uplift = int(input("Please enter the price to uplift: "))
 print(f"You have chosen {select} for {product} support level {level} and last years price was {price_uplift}.")
 
 
@@ -28,8 +28,8 @@ def uplift_cal():
     if price_uplift == data:
         print("No Uplift List Price has Been Reached")
     else: 
-        final = price_uplift * 1.3
-        print(final)
+        final = price_uplift * 1.07
+        print(f"Your uplifted price is {final}")
 
 def mode_select(x):
     if select == "renewal":
@@ -40,8 +40,3 @@ def mode_select(x):
 
 mode_select(select)
 
-
-
-#Create a function to uplift a price entered by a user
-
-uplift_cal()
