@@ -13,30 +13,68 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Sales_Program')
 price = SHEET.worksheet('Price')
 
-select = input("Please select a calculator mode, Type renewal or currency: ")
-product = input("Please select your product, Toad or Kace: ")
-level = input("Please select support level, standard, mid, premier: ")
-price_uplift = int(input("Please enter the price to uplift: "))
-print(f"You have chosen {select} for {product} support level {level} and last years price was {price_uplift}.")
 
 
-
-#this is how you get access to one individual cell
-data = int(price.acell( 'B2').value)
-
-def uplift_cal():
-    if price_uplift == data:
+def renew_cal():
+    if cost == data:
         print("No Uplift List Price has Been Reached")
     else: 
-        final = price_uplift * 1.07
+        final = cost * 1.07
         print(f"Your uplifted price is {final}")
 
-def mode_select(x):
-    if select == "renewal":
-        uplift_cal()
-    elif select == "currency":
-        print("not created yet")
+def renew_info():
+    """ 
+    Intro page for renewal calculator. Allows the user to select
+    the product and level and current renewal price. 
+    """
+    print("Please fill out the requested information to get your quote pricing")
 
+    product = input("Is your product, Toad, Kace or OneIdentity?: ")
+    
+    level = input("Is the level of support Standard, Mid or Premier?: ")
+    
+    cost = float(input("What is the price of your renewal quote?: "))
 
-mode_select(select)
+    print(f"Your product is {product} the level is {level} and the price is {cost}")
+    
+    print ("Is this correct? Y/N")
+    approval = input("Please enter Y if the informatiton is correct or N if you need to re-enter: ")
+    
+def intro_page():
+    """
+     Introductory screen for the user, explains what the calculator does
+     and gives them the ability to select the mode they want to use.
+    """
 
+    print("Welcome to the Sales Calculator!\n")
+
+    print("""\
+     __________
+    | ________ |
+    ||12345678||
+    |##########|
+    |[M|#|C][-]|
+    |[7|8|9][+]|
+    |[4|5|6][x]|
+    |[1|2|3][%]|
+    |[.|O|:][=]|
+     ----------\n """)
+
+    print("This program allows you to convert currency or help you price your renewal quote")
+
+    while True:
+        print("To get started, please enter convert if you want the currency converter.")
+        print("Enter renewal if you want to price your renewal quote")
+
+        type = input("Please enter your choice here:\n")
+
+        if type == "convert":
+            convert_cal()
+            break
+        elif type == "renewal":
+            renew_info()
+            break
+        else:
+            print("Invalid input, please try again.\n")
+
+intro_page()
