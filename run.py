@@ -28,11 +28,19 @@ data_mid_toad = float(price.acell('B3').value)
 data_prem_toad = float(price.acell('B4').value)
 
 def toad_pricing():
-    print("Please enter your support level: ")
-    input("standard,mid,premiere: ")
+    level = str(input("standard,mid,premiere: "))
+    price = float(input("Amount: "))
 
-    print("Please enter your price: ")
-    input("Price: ")
+    if level == "standard":
+        if price < data_standard_toad:
+            cost = price * 1.03
+            print(f"Your uplifted price is {cost}")
+        elif price >= data_standard_toad:
+            print(f"Your quote has reached the list \
+            price of {data_standard_toad} no uplift needed.")
+        else:
+            print(f"{level} is not a valid input try again")
+            toad_pricing()
 
 def start_page():
     """ 
