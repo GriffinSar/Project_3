@@ -28,6 +28,7 @@ data_mid_toad = float(price.acell('B3').value)
 data_prem_toad = float(price.acell('B4').value)
 
 def toad_pricing():
+    """function to uplift the price"""
     level = str(input("standard,mid,premiere: "))
     price = float(input("Amount: "))
 
@@ -41,6 +42,14 @@ def toad_pricing():
         else:
             print(f"{level} is not a valid input try again")
             toad_pricing()
+
+    elif level == "mid":
+    elif level == "premiere":
+    
+    else:
+        print(f"{level} is not a valid input try again")
+        toad_pricing()
+
 
 def start_page():
     """ 
