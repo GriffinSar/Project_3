@@ -115,7 +115,7 @@ A frequent Visitor wants to be able to convert currency. They also want to be ab
 - https://www.asciiart.eu/electronics/calculators (I got the image of a calculator from this site)
 - google sheets
 - excel 
--
+- https://pypi.org/project/colorama/  (Api for adding colour to text)
 
 
 # Acknowledgements
