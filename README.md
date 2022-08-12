@@ -34,20 +34,21 @@
 # Sales Calculator
 
 ### Purpose
-
+The purpose of this site is to provide the user with pricing for thier renewal quotes. They input some details, the price, level and product and the system will provide them with the new pricing for this years quote. They can also choose to get the pricing for a 2 year and 3 year quote so they can easily provide all options to the customer.
+This program also stores the customer data so that the user can access previous quote prices for their reference. 
 
 # Target Audience
-The Target Audience for this website is sales reps. These reps have a number of manual calculatitons and currency conversion that needs to be done to prepare a quote for their customer. This app is designed to take away some of this manual work so that the sales rep can concentrate on selling the products to the customer rather than focusing so much time on administration work.
+The Target Audience for this website is sales reps specifically the sales reps who work for my current emplpyer Quest software. These reps have a number of manual calculatitons that needs to be done to prepare a quote for their customer, this has to be done for thousands of quotes every three months. Part of my role in the past was to price these quotes for the reps. There is a definate need here for something that makes the process easier and more streamlined. This app is designed to take away some of this manual work so that the sales rep can concentrate on selling the products to the customer rather than focusing so much time on administration work.
 This is the sort of functionality that many CRM systems implement to streamline quoting for customers. 
 
 # User Stories
 ### First Time Visitor Goals
-A first time visitor wants to be able to choose wether they want to convert a currency or to price a renewal quote. They want to be able to input the spcific data of this quote and have it stored by the system in an excel. The user also wants to be able to get the price for a 2 or 3 year renewal so they can present the three options to their customers.
+A first time visitor wants to be able to choose wether they want to choose what product they are working and the support level. They want to be able to input the spcific data of this quote and have it stored by the system in an excel. The user also wants to be able to get the price for a 2 or 3 year renewal so they can present the three options to their customers.
 ### Returning Visitor Goals
-A returning visitor wants to be able to use the app to convert currency or price a quote just as the first time visitor. But this user also wants to be able to access previous quote data for users so they can see a list of previous priced quotes for this customer.
+A returning visitor wants to be able to use the app toprice a quote just as the first time visitor. But this user also wants to be able to access previous quote data for users so they can see a list of previous priced quotes for this customer.
 
 ### Frequent Visitor Goals
-A frequent Visitor wants to be able to convert currency. They also want to be able to access legacy pricing date along with being able to price new quotes and also get previous pricing for a specific customer if there is any.
+A frequent Visitor wants to be able to price new quotes and also get previous pricing for a specific customer if there is any.
 
 
 # Owner Goals
@@ -77,12 +78,15 @@ A frequent Visitor wants to be able to convert currency. They also want to be ab
 # Features 
 
 ### Existing Features
-
+Product Select
+Level Select
+PPM Select
+Access stored data
 
 
 
 ### Features Left to Implement
-
+Currency converter
 
 # Testing 
 
@@ -123,6 +127,5 @@ A frequent Visitor wants to be able to convert currency. They also want to be ab
 
 
 ## Disclaimer
-
-
+This website is for educational use only.
 

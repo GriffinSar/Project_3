@@ -38,7 +38,6 @@ def toad_stan():
         print(f"Your quote has reached the list \
         price of {data_standard_toad} no uplift needed.")
 
-
 def toad_mid():
     """Function to price mid Toad Quotes"""
     quote = float(input("Amount: "))
