@@ -38,6 +38,17 @@ def toad_stan():
         print(f"Your quote has reached the list \
         price of {data_standard_toad} no uplift needed.")
 
+    print("Would you like pricing for the second and third year? type Y/N")
+    multi_year = input("Y/N: ")
+    second_year = cost /100 * 90 
+    print(second_year)
+    third_year = cost /100 * 85
+
+    if multi_year == "Y":
+        print(f"Second year price {second_year}, Third year price {third_year}.")
+    else :
+        print("nothing")
+
 def toad_mid():
     """Function to price mid Toad Quotes"""
     quote = float(input("Amount: "))
