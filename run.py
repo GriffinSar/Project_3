@@ -27,25 +27,50 @@ data_standard_toad = float(price.acell('B2').value)
 data_mid_toad = float(price.acell('B3').value)
 data_prem_toad = float(price.acell('B4').value)
 
+def toad_stan():
+    """Function to price standard Toad Quotes"""
+    quote = float(input("Amount: "))
+
+    if quote < data_standard_toad:
+        cost = quote * 1.03
+        print(f"Your uplifted price is {cost}")
+    elif quote >= data_standard_toad:
+        print(f"Your quote has reached the list \
+        price of {data_standard_toad} no uplift needed.")
+
+
+def toad_mid():
+    """Function to price mid Toad Quotes"""
+    quote = float(input("Amount: "))
+
+    if quote < data_mid_toad:
+        cost = quote * 1.05
+        print(f"Your uplifted price is {cost}")
+    elif quote >= data_mid_toad:
+        print(f"Your quote has reached the list \
+        price of {data_mid_toad} no uplift needed.")
+
+def toad_prem():
+    """Function to price premiere Toad Quotes"""
+    quote = float(input("Amount: "))
+
+    if quote < data_prem_toad:
+        cost = quote * 1.07
+        print(f"Your uplifted price is {cost}")
+    elif quote >= data_prem_toad:
+        print(f"Your quote has reached the list \
+        price of {data_prem_toad} no uplift needed.")
+
 def toad_pricing():
     """function to uplift the price"""
     level = str(input("standard,mid,premiere: "))
-    price = float(input("Amount: "))
 
     if level == "standard":
-        if price < data_standard_toad:
-            cost = price * 1.03
-            print(f"Your uplifted price is {cost}")
-        elif price >= data_standard_toad:
-            print(f"Your quote has reached the list \
-            price of {data_standard_toad} no uplift needed.")
-        else:
-            print(f"{level} is not a valid input try again")
-            toad_pricing()
-
+        toad_stan()
     elif level == "mid":
+        toad_mid()
     elif level == "premiere":
-    
+        toad_prem()
     else:
         print(f"{level} is not a valid input try again")
         toad_pricing()
