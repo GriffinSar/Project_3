@@ -29,13 +29,12 @@ data_prem_toad = float(price.acell('B4').value)
 
 def toad_stan():
     """Function to price standard Toad Quotes"""
-    quote = float(input("Amount: "))
 
     if quote < data_standard_toad:
         cost = quote * 1.03
-        print(f"Your uplifted price is {cost}")
+        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
     elif quote >= data_standard_toad:
-        print(f"Your quote has reached the list \
+        print(Fore.CYAN + Style.BRIGHT + f"Your quote has reached the list \
         price of {data_standard_toad} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
@@ -45,13 +44,13 @@ def toad_stan():
     third_year = cost /100 * 85
 
     if multi_year == "Y":
-        print(f"Second year price {second_year}, Third year price {third_year}.")
+        print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
+        print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
     else :
-        print("nothing")
+        print(Fore.CYAN + Style.BRIGHT + "nothing")
 
 def toad_mid():
     """Function to price mid Toad Quotes"""
-    quote = float(input("Amount: "))
 
     if quote < data_mid_toad:
         cost = quote * 1.05
@@ -62,24 +61,23 @@ def toad_mid():
 
 def toad_prem():
     """Function to price premiere Toad Quotes"""
-    quote = float(input("Amount: "))
 
     if quote < data_prem_toad:
         cost = quote * 1.07
-        print(f"Your uplifted price is {cost}")
+        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
     elif quote >= data_prem_toad:
-        print(f"Your quote has reached the list \
+        print(Fore.CYAN + Style.BRIGHT + f"Your quote has reached the list \
         price of {data_prem_toad} no uplift needed.")
 
 def toad_pricing():
     """function to uplift the price"""
-    level = str(input("standard,mid,premiere: "))
+    level = str(input("Standard,Mid,Premiere: "))
 
-    if level == "standard":
+    if level == "Standard":
         toad_stan()
-    elif level == "mid":
+    elif level == "Mid":
         toad_mid()
-    elif level == "premiere":
+    elif level == "Premiere":
         toad_prem()
     else:
         print(f"{level} is not a valid input try again")
@@ -92,7 +90,7 @@ def start_page():
     """
 
     print(Fore.CYAN + Style.BRIGHT +
-        "Welcome to your renewal calculator!\n")
+        "Welcome to your Renewal Calculator!\n")
     print(Fore.MAGENTA + Style.BRIGHT + """\
      _________
     | ________ |
@@ -118,6 +116,8 @@ def start_page():
     \nKace Product.\n")
 
     type = input("Please enter your choice here:\n")
+    global quote
+    quote = float(input("Amount: "))
 
     if type == "Toad":
         toad_pricing()   
