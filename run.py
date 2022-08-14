@@ -27,10 +27,42 @@ data_standard_toad = float(price.acell('B2').value)
 data_mid_toad = float(price.acell('B3').value)
 data_prem_toad = float(price.acell('B4').value)
 
+def save_details():
+    """
+    Allow the user to save the details,
+    to the database for later.
+    """
+
+    while True:
+        print(Fore.LIGHTRED_EX + Style.BRIGHT +
+              "Would you like to save these details?\n")
+        print("Type 's' to save these details for future use.")
+        print("Type 'x' to return to the main menu.")
+
+        save = input("Enter your selection here:\n")
+        save = save.lower()
+        if save == "s":
+            list_details = [
+                cust_name, cost, second_year, third_year
+            ]
+            print("Saving your details...\n")
+            database = SHEET.worksheet('database')
+            database.append_row(list_details)
+            print("Great! Your details have been saved to the database.\n")
+            print("\nTaking you to the main menu...")
+            break
+        elif save == "x":
+            first_page()()
+            break
+        else:
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+
+
 def toad_stan():
     """Function to price standard Toad Quotes"""
 
     if quote < data_standard_toad:
+        global cost
         cost = quote * 1.03
         print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
     elif quote >= data_standard_toad:
@@ -39,13 +71,15 @@ def toad_stan():
 
     print("Would you like pricing for the second and third year? type Y/N")
     multi_year = input("Y/N: ")
+    global second_year
     second_year = cost /100 * 90 
-    print(second_year)
+    global third_year
     third_year = cost /100 * 85
 
     if multi_year == "Y":
         print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
         print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+        save_details()
     else :
         print(Fore.CYAN + Style.BRIGHT + "nothing")
 

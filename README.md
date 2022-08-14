@@ -119,6 +119,7 @@ Currency converter
 - https://www.asciiart.eu/electronics/calculators (I got the image of a calculator from this site)
 - google sheets
 - excel 
+- pandas (Data manipulation)
 - https://pypi.org/project/colorama/  (Api for adding colour to text)
 
 
