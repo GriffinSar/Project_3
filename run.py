@@ -77,11 +77,15 @@ def toad_stan():
     third_year = cost /100 * 85
 
     if multi_year == "Y":
-        print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
-        print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
-        save_details()
-    else :
-        print(Fore.CYAN + Style.BRIGHT + "nothing")
+            print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
+            print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+            save_details()
+    elif multi_year == "N":
+            print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+            save_details()
+
+    else: 
+        print("invalid input")
 
 
 def toad_mid():
