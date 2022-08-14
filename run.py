@@ -52,6 +52,35 @@ def hist_data():
          user_record = df.loc[df['cust_name'] == cust_name].to_string(index=False)
          print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{user_record}\n")
 
+         while True:
+            print("What would you like to do now?")
+            print("Type 'a' to check another customer.")
+            print("Type 'b' to return to the main menu.")
+            print("Type 'c' to exit the renewal calculator")
+
+            selection = input("Enter your selection here:\n")
+            selection = selection.lower()
+            if selection == "a":
+                hist_data()
+                break
+            elif selection == "b":
+                first_page()
+                break
+            elif selection == "c":
+                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
+Thank you for using the calculator and goodbye.")
+                break
+            else:
+                print(Fore.LIGHTYELLOW_EX +
+                      "Invalid input, please try again.\n")
+
+    else:
+        print(Fore.LIGHTYELLOW_EX +
+              "\nYou do not currently have any details stored.")
+        print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
+        first_page()
+
+        
 def first_page():
     """ 
         Intro Page
