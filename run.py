@@ -48,11 +48,12 @@ def save_details():
             print("Saving your details...\n")
             database = SHEET.worksheet('database')
             database.append_row(list_details)
-            print("Great! Your details have been saved to the database.\n")
+            print(Fore.CYAN + Style.BRIGHT + "Your details have been saved to the database.\n")
             print("\nTaking you to the main menu...")
+            
             break
         elif save == "x":
-            first_page()()
+            first_page()
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
@@ -66,8 +67,10 @@ def toad_stan():
         cost = quote * 1.03
         print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
     elif quote >= data_standard_toad:
-        print(Fore.CYAN + Style.BRIGHT + f"Your quote has reached the list \
-        price of {data_standard_toad} no uplift needed.")
+        print(Fore.RED + Style.BRIGHT + f"Your quote has reached the list price")
+        print(Fore.RED + Style.BRIGHT + f"of {data_standard_toad} no uplift needed.")
+        print(Fore.RED + Style.BRIGHT + "Directing back to Home page")
+        first_page()
 
     print("Would you like pricing for the second and third year? type Y/N")
     multi_year = input("Y/N: ")
@@ -92,21 +95,59 @@ def toad_mid():
     """Function to price mid Toad Quotes"""
 
     if quote < data_mid_toad:
+        global cost
         cost = quote * 1.05
         print(f"Your uplifted price is {cost}")
     elif quote >= data_mid_toad:
         print(f"Your quote has reached the list \
         price of {data_mid_toad} no uplift needed.")
 
+    print("Would you like pricing for the second and third year? type Y/N")
+    multi_year = input("Y/N: ")
+    global second_year
+    second_year = cost /100 * 90 
+    global third_year
+    third_year = cost /100 * 85
+
+    if multi_year == "Y":
+            print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
+            print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+            save_details()
+    elif multi_year == "N":
+            print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+            save_details()
+
+    else: 
+        print("invalid input")
+
 def toad_prem():
     """Function to price premiere Toad Quotes"""
 
     if quote < data_prem_toad:
+        global cost
         cost = quote * 1.07
         print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
     elif quote >= data_prem_toad:
         print(Fore.CYAN + Style.BRIGHT + f"Your quote has reached the list \
         price of {data_prem_toad} no uplift needed.")
+
+    print("Would you like pricing for the second and third year? type Y/N")
+    multi_year = input("Y/N: ")
+    global second_year
+    second_year = cost /100 * 90 
+    global third_year
+    third_year = cost /100 * 85
+
+    if multi_year == "Y":
+            print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
+            print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+            save_details()
+    elif multi_year == "N":
+            print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+            save_details()
+
+    else: 
+        print("invalid input")
 
 def toad_pricing():
     """function to uplift the price"""
@@ -123,9 +164,9 @@ def toad_pricing():
         toad_pricing()
 
 def new_customer():
-    print("To get started, please enter your username.")
-    print("Usernames must be between 2 and 15 characters,")
-    print("and should contain only letters from a to z.\n")
+    print(Fore.CYAN + Style.BRIGHT + "To get started, please enter your username.")
+    print(Fore.CYAN + Style.BRIGHT + "Usernames must be between 2 and 15 characters,")
+    print(Fore.CYAN + Style.BRIGHT + "and should contain only letters from a to z.\n")
     
     global cust_name
     cust_name = input("Enter your customer name here:\n")
@@ -133,16 +174,13 @@ def new_customer():
     if cust_name.isalpha() and len(cust_name) > 1 and len(cust_name) < 16:
         print("Customer name accepted")
     else:
-        print(Fore.LIGHTYELLOW_EX +
-                "\nThe username you have entered is not valid, \
-                please try again.\n")
+        print(Fore.LIGHTYELLOW_EX + "The name you have entered is not valid,please try again.")
+        new_customer()
 
     print(Fore.CYAN + Style.BRIGHT +
-    "Please enter Toad if your Quote is for a Toad \
-    \nproduct.")
+    "Please enter Toad if your Quote is for a Toad product.")
     print(Fore.CYAN + Style.BRIGHT +
-    "Please enter Kace if your Quote is for a \
-    \nKace Product.\n")
+    "Please enter Kace if your Quote is for a Kace Product.\n")
     
     global type
     type = input("Please enter your choice here:\n")
@@ -155,6 +193,7 @@ def new_customer():
         print("Goodbye")      
     else:
         print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+
 
 def hist_data():
     """
@@ -202,8 +241,7 @@ def first_page():
     """ 
         Intro Page
     """
-    print(Fore.CYAN + Style.BRIGHT +
-        "Welcome to your Renewal Calculator!\n")
+    print(Fore.CYAN + Style.BRIGHT + "Welcome to your Renewal Calculator!\n")
     print(Fore.MAGENTA + Style.BRIGHT + """\
      _________
     | ________ |
@@ -220,18 +258,23 @@ def first_page():
     print("renewal cost and get this years uplifted price.")
     print("Along with multi-year pricing.\n")
 
-    print(Fore.CYAN + Style.BRIGHT +
-    "To start enter 1 if you want to start a new calculation.")
-    print(Fore.CYAN + Style.BRIGHT +
-    "Enter 2 if you want to pull historical data for a customer")
+    while True:
+        print(Fore.CYAN + Style.BRIGHT + "Enter 1 if you want to start a new\
+        \ncalculation.")
+        print(Fore.CYAN + Style.BRIGHT + "Enter 2 if you want to access historical\
+        \ndata for a customer")
 
-    mode = input("Please enter your choice here:\n")
+        mode = input("Please enter your choice here:\n")
     
-    if mode == "1":
-        new_customer()
-    elif mode == "2":
-        hist_data()
-    else:
-        print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+        if mode == "1":
+            new_customer()
+            break
+        elif mode == "2":
+            hist_data()
+            break
+        else:
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+            
+
 
 first_page()
