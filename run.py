@@ -26,6 +26,9 @@ stored_info = SHEET.worksheet('database')
 data_standard_toad = float(price.acell('B2').value)
 data_mid_toad = float(price.acell('B3').value)
 data_prem_toad = float(price.acell('B4').value)
+data_standard_kace = float(price.acell('C2').value)
+data_mid_kace = float(price.acell('C3').value)
+data_prem_kace = float(price.acell('C4').value)
 
 def save_details():
     """
@@ -43,14 +46,14 @@ def save_details():
         save = save.lower()
         if save == "s":
             list_details = [
-                cust_name, cost, second_year, third_year
+                cust_name, type, cost, second_year, third_year
             ]
             print("Saving your details...\n")
             database = SHEET.worksheet('database')
             database.append_row(list_details)
             print(Fore.CYAN + Style.BRIGHT + "Your details have been saved to the database.\n")
-            print("\nTaking you to the main menu...")
-            
+            print("\nTaking you to the main page...")
+            first_page()
             break
         elif save == "x":
             first_page()
@@ -59,18 +62,47 @@ def save_details():
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
 
-def toad_stan():
-    """Function to price standard Toad Quotes"""
+def kace_stan():
+    """Function to price standard Kace Quotes"""
+    while True: 
+        if quote < data_standard_kace:
+            global cost
+            cost = quote * 1.03
+            print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+        elif quote >= data_standard_toad:
+            print(Fore.RED + Style.BRIGHT + f"Your quote has reached the list price")
+            print(Fore.RED + Style.BRIGHT + f"of {data_standard_toad} no uplift needed.")
+            print(Fore.RED + Style.BRIGHT + "Directing back to Home page")
+            first_page()
+            break
 
-    if quote < data_standard_toad:
+        print("Would you like pricing for the second and third year? type Y/N")
+        multi_year = input("Y/N: ")
+        global second_year
+        second_year = cost /100 * 90 
+        global third_year
+        third_year = cost /100 * 85
+
+        if multi_year == "Y":
+            print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
+            print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+            save_details()
+        elif multi_year == "N":
+            print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+            save_details()
+
+        else: 
+            print("invalid input")
+
+def kace_mid():
+    """Function to price mid Toad Quotes"""
+    if quote < data_mid_kace:
         global cost
-        cost = quote * 1.03
-        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
-    elif quote >= data_standard_toad:
-        print(Fore.RED + Style.BRIGHT + f"Your quote has reached the list price")
-        print(Fore.RED + Style.BRIGHT + f"of {data_standard_toad} no uplift needed.")
-        print(Fore.RED + Style.BRIGHT + "Directing back to Home page")
-        first_page()
+        cost = quote * 1.05
+        print(f"Your uplifted price is {cost}")
+    elif quote >= data_mid_toad:
+        print(f"Your quote has reached the list \
+        price of {data_mid_toad} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
     multi_year = input("Y/N: ")
@@ -89,6 +121,85 @@ def toad_stan():
 
     else: 
         print("invalid input")
+
+
+def kace_prem():
+    """Function to price premiere Toad Quotes"""
+
+    if quote < data_prem_kace:
+        global cost
+        cost = quote * 1.07
+        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+    elif quote >= data_prem_toad:
+        print(Fore.CYAN + Style.BRIGHT + f"Your quote has reached the list \
+        price of {data_prem_toad} no uplift needed.")
+
+    print("Would you like pricing for the second and third year? type Y/N")
+    multi_year = input("Y/N: ")
+    global second_year
+    second_year = cost /100 * 90 
+    global third_year
+    third_year = cost /100 * 85
+
+    if multi_year == "Y":
+            print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
+            print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+            save_details()
+    elif multi_year == "N":
+            print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+            save_details()
+
+    else: 
+        print("invalid input")
+
+
+def kace_pricing():
+    """function to uplift the price"""
+    level = str(input("Standard,Mid,Premiere: "))
+
+    if level == "Standard":
+        kace_stan()
+    elif level == "Mid":
+        kace_mid()
+    elif level == "Premiere":
+        kace_prem()
+    else:
+        print(f"{level} is not a valid input try again")
+        kace_pricing()
+
+
+def toad_stan():
+    """Function to price standard Toad Quotes"""
+
+    while True: 
+        if quote < data_standard_toad:
+            global cost
+            cost = quote * 1.03
+            print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+        elif quote >= data_standard_toad:
+            print(Fore.RED + Style.BRIGHT + f"Your quote has reached the list price")
+            print(Fore.RED + Style.BRIGHT + f"of {data_standard_toad} no uplift needed.")
+            print(Fore.RED + Style.BRIGHT + "Directing back to Home page")
+            first_page()
+            break
+
+        print("Would you like pricing for the second and third year? type Y/N")
+        multi_year = input("Y/N: ")
+        global second_year
+        second_year = cost /100 * 90 
+        global third_year
+        third_year = cost /100 * 85
+
+        if multi_year == "Y":
+            print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
+            print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+            save_details()
+        elif multi_year == "N":
+            print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+            save_details()
+
+        else: 
+            print("invalid input")
 
 
 def toad_mid():
@@ -120,6 +231,7 @@ def toad_mid():
     else: 
         print("invalid input")
 
+
 def toad_prem():
     """Function to price premiere Toad Quotes"""
 
@@ -149,6 +261,7 @@ def toad_prem():
     else: 
         print("invalid input")
 
+
 def toad_pricing():
     """function to uplift the price"""
     level = str(input("Standard,Mid,Premiere: "))
@@ -162,6 +275,7 @@ def toad_pricing():
     else:
         print(f"{level} is not a valid input try again")
         toad_pricing()
+
 
 def new_customer():
     print(Fore.CYAN + Style.BRIGHT + "To get started, please enter your username.")
@@ -218,10 +332,8 @@ def hist_data():
             selection = selection.lower()
             if selection == "a":
                 hist_data()
-                break
             elif selection == "b":
                 first_page()
-                break
             elif selection == "c":
                 print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
                 Thank you for using the calculator and goodbye.")
@@ -264,7 +376,7 @@ def first_page():
         print(Fore.CYAN + Style.BRIGHT + "Enter 2 if you want to access historical\
         \ndata for a customer")
 
-        mode = input("Please enter your choice here:\n")
+        mode = input("Please enter your selection here:\n")
     
         if mode == "1":
             new_customer()
@@ -275,6 +387,5 @@ def first_page():
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
             
-
 
 first_page()
