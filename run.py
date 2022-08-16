@@ -41,6 +41,7 @@ def save_details():
               "Would you like to save these details?\n")
         print("Type 's' to save these details for future use.")
         print("Type 'x' to return to the main menu.")
+        print("Type 'z' to exit calculator")
 
         save = input("Enter your selection here:\n")
         save = save.lower()
@@ -58,6 +59,9 @@ def save_details():
         elif save == "x":
             first_page()
             break
+        elif save == "z":
+            print("Thanks for using the calculator, goodbye!")
+            break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
@@ -67,32 +71,38 @@ def kace_stan():
     while True: 
         if quote < data_standard_kace:
             global cost
-            cost = quote * 1.03
+            cost = quote * 1.04
             print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
-        elif quote >= data_standard_toad:
+        elif quote >= data_standard_kace:
             print(Fore.RED + Style.BRIGHT + f"Your quote has reached the list price")
-            print(Fore.RED + Style.BRIGHT + f"of {data_standard_toad} no uplift needed.")
+            print(Fore.RED + Style.BRIGHT + f"of {data_standard_kace} no uplift needed.")
             print(Fore.RED + Style.BRIGHT + "Directing back to Home page")
             first_page()
             break
+            
 
-        print("Would you like pricing for the second and third year? type Y/N")
-        multi_year = input("Y/N: ")
-        global second_year
-        second_year = cost /100 * 90 
-        global third_year
-        third_year = cost /100 * 85
+            print("Would you like pricing for the second and third year? type Y/N")
+            multi_year = input("Y/N: ")
+            global second_year
+            second_year = cost /100 * 90 
+            global third_year
+            third_year = cost /100 * 85
 
-        if multi_year == "Y":
-            print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
-            print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
-            save_details()
-        elif multi_year == "N":
-            print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
-            save_details()
+            if multi_year == "Y":
+                print(Fore.CYAN + Style.BRIGHT + f"Second year price\
+                \n{second_year}")
+                print(Fore.CYAN + Style.BRIGHT + f"Third year price\
+                \n{third_year}")
+                save_details()
+                break
+            elif multi_year == "N":
+                print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+                save_details()
+                break
 
         else: 
             print("invalid input")
+            break
 
 def kace_mid():
     """Function to price mid Toad Quotes"""
@@ -100,9 +110,9 @@ def kace_mid():
         global cost
         cost = quote * 1.05
         print(f"Your uplifted price is {cost}")
-    elif quote >= data_mid_toad:
+    elif quote >= data_mid_kace:
         print(f"Your quote has reached the list \
-        price of {data_mid_toad} no uplift needed.")
+        price of {data_mid_kace} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
     multi_year = input("Y/N: ")
@@ -130,9 +140,9 @@ def kace_prem():
         global cost
         cost = quote * 1.07
         print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
-    elif quote >= data_prem_toad:
+    elif quote >= data_prem_kace:
         print(Fore.CYAN + Style.BRIGHT + f"Your quote has reached the list \
-        price of {data_prem_toad} no uplift needed.")
+        price of {data_prem_kace} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
     multi_year = input("Y/N: ")
@@ -174,7 +184,7 @@ def toad_stan():
     while True: 
         if quote < data_standard_toad:
             global cost
-            cost = quote * 1.03
+            cost = quote * 1.04
             print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
         elif quote >= data_standard_toad:
             print(Fore.RED + Style.BRIGHT + f"Your quote has reached the list price")
@@ -304,7 +314,7 @@ def new_customer():
     if type == "Toad":
         toad_pricing()   
     elif type == "Kace":
-        print("Goodbye")      
+        kace_pricing()     
     else:
         print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
@@ -319,32 +329,30 @@ def hist_data():
          print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
               "\nThe details you currently have saved are:\n")
          df = pd.DataFrame(stored_info.get_all_records())
-         user_record = df.loc[df['cust_name'] == cust_name].to_string(index=False)
+         user_record = df.loc[df['Customer'] == cust_name].to_string(index=False)
          print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{user_record}\n")
 
-         while True:
-            print("What would you like to do now?")
-            print("Type 'a' to check another customer.")
-            print("Type 'b' to return to the main menu.")
-            print("Type 'c' to exit the renewal calculator")
+    while True:
+        print("What would you like to do now?")
+        print("Type 'a' to check another customer.")
+        print("Type 'b' to return to the main menu.")
+        print("Type 'c' to exit the renewal calculator")
 
-            selection = input("Enter your selection here:\n")
-            selection = selection.lower()
-            if selection == "a":
-                hist_data()
-            elif selection == "b":
-                first_page()
-            elif selection == "c":
-                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\n\
-                Thank you for using the calculator and goodbye.")
-                break
-            else:
-                print(Fore.LIGHTYELLOW_EX +
-                      "Invalid input, please try again.\n")
+        selection = input("Enter your selection here:\n")
+        selection = selection.lower()
+
+        if selection == "a":
+            hist_data()
+        elif selection == "b":
+            first_page()
+        elif selection == "c":
+            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\
+        \nThank you for using the calculator and goodbye.")
+        break
 
     else:
         print(Fore.LIGHTYELLOW_EX +
-              "\nYou do not currently have any details stored.")
+        "\nYou do not currently have any details stored.")
         print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
         first_page()
 
@@ -369,6 +377,7 @@ def first_page():
     print("This program lets you to enter last years")
     print("renewal cost and get this years uplifted price.")
     print("Along with multi-year pricing.\n")
+    print("You can also save and retrieve customer pricing details")
 
     while True:
         print(Fore.CYAN + Style.BRIGHT + "Enter 1 if you want to start a new\
