@@ -23,12 +23,12 @@ SHEET = GSPREAD_CLIENT.open('Sales_Program')
 price = SHEET.worksheet('Price')
 stored_info = SHEET.worksheet('database')
 
-data_standard_toad = float(price.acell('B2').value)
-data_mid_toad = float(price.acell('B3').value)
-data_prem_toad = float(price.acell('B4').value)
-data_standard_kace = float(price.acell('C2').value)
-data_mid_kace = float(price.acell('C3').value)
-data_prem_kace = float(price.acell('C4').value)
+data_standard_toad = float(price.acell('C3').value)
+data_mid_toad = float(price.acell('C4').value)
+data_prem_toad = float(price.acell('C5').value)
+data_standard_kace = float(price.acell('D3').value)
+data_mid_kace = float(price.acell('D4').value)
+data_prem_kace = float(price.acell('D5').value)
 
 def save_details():
     """
@@ -108,7 +108,7 @@ def kace_mid():
     """Function to price mid Toad Quotes"""
     if quote < data_mid_kace:
         global cost
-        cost = quote * 1.05
+        cost = quote * 1.06
         print(f"Your uplifted price is {cost}")
     elif quote >= data_mid_kace:
         print(f"Your quote has reached the list \
@@ -138,7 +138,7 @@ def kace_prem():
 
     if quote < data_prem_kace:
         global cost
-        cost = quote * 1.07
+        cost = quote * 1.08
         print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
     elif quote >= data_prem_kace:
         print(Fore.CYAN + Style.BRIGHT + f"Your quote has reached the list \
@@ -288,9 +288,12 @@ def toad_pricing():
 
 
 def new_customer():
-    print(Fore.CYAN + Style.BRIGHT + "To get started, please enter your username.")
-    print(Fore.CYAN + Style.BRIGHT + "Usernames must be between 2 and 15 characters,")
-    print(Fore.CYAN + Style.BRIGHT + "and should contain only letters from a to z.\n")
+    print(Fore.CYAN + Style.BRIGHT + "To get started, please enter your\
+\ncustomer name.")
+    print(Fore.CYAN + Style.BRIGHT + "Names must be between 2 and 15\
+\ncharacters,")
+    print(Fore.CYAN + Style.BRIGHT + "and should contain only letters from a\
+\nto z.")
     
     global cust_name
     cust_name = input("Enter your customer name here:\n")
@@ -308,6 +311,8 @@ def new_customer():
     
     global type
     type = input("Please enter your choice here:\n")
+
+    print(Fore.CYAN + Style.BRIGHT + "Please enter the cost of last years renewal quote.")
     global quote
     quote = float(input("Amount: "))
 

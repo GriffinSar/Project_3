@@ -6,6 +6,7 @@
     - [First-Time-Visitor-Goals](#first-time-visitor-goals)
     - [Returning-Visitor-Goals](#returning-visitor-goals)
     - [Frequent-Visitor-Goals](#frequent-visitor-goals)
+    - [Owner-Goals](#owner-goals)
 - [Design](#design)
     - [Colour-Scheme](#colour-scheme)
     - [Logo](#logo)
@@ -38,14 +39,19 @@ The purpose of this site is to provide the user with pricing for thier renewal q
 This program also stores the customer data so that the user can access previous quote prices for their reference. 
 
 # Target Audience
-The Target Audience for this website is sales reps specifically the sales reps who work for my current emplpyer Quest software. These reps have a number of manual calculatitons that needs to be done to prepare a quote for their customer, this has to be done for thousands of quotes every three months. Part of my role in the past was to price these quotes for the reps. There is a definate need here for something that makes the process easier and more streamlined. This app is designed to take away some of this manual work so that the sales rep can concentrate on selling the products to the customer rather than focusing so much time on administration work.
+The Target Audience for this website is sales reps specifically the sales reps who work for my current employer Quest software. These reps have a number of manual calculatitons that needs to be done to prepare a quote for their customer, this has to be done for thousands of quotes every three months. Part of my role in the past was to price these quotes for the reps. There is a definate need here for something that makes the process easier and more streamlined. This app is designed to take away some of this manual work so that the sales rep can concentrate on selling the products to the customer rather than focusing so much time on administration work.
 This is the sort of functionality that many CRM systems implement to streamline quoting for customers. 
 
 # User Stories
 ### First Time Visitor Goals
-A first time visitor wants to be able to choose wether they want to choose what product they are working and the support level. They want to be able to input the spcific data of this quote and have it stored by the system in an excel. The user also wants to be able to get the price for a 2 or 3 year renewal so they can present the three options to their customers.
+As a first time visitor I want to be able to choose what product I am working with and the support level so I can get an accurate calculation for my renewal quote. 
+I also wants to be able to get the price for a 2 or 3 year renewal so I can present the three options to my customer.
+I want to be able to input the customer name and spcific data of this quote and have it stored by the system in a google sheet so I can access this data again at a later stage. 
+As a first time visitor (Or Returning/ Frequent) I want the program to be simple and easy to use. 
+As a first time visitor (Or Returning/ Frequent) I want the system to work even if I input the wrong type of data.
+
 ### Returning Visitor Goals
-A returning visitor wants to be able to use the app toprice a quote just as the first time visitor. But this user also wants to be able to access previous quote data for users so they can see a list of previous priced quotes for this customer.
+A returning visitor wants to be able to use the app to price a quote just as the first time visitor. But this user also wants to be able to access previous quote data for users so they can see a list of previous priced quotes for this customer.
 
 ### Frequent Visitor Goals
 A frequent Visitor wants to be able to price new quotes and also get previous pricing for a specific customer if there is any.
@@ -61,6 +67,12 @@ A frequent Visitor wants to be able to price new quotes and also get previous pr
 # Design
 
 ### Colour scheme
+
+As this is a terminal based application the level of detail for colour in this page are not that detailed. 
+I have imported colours from the Python library colorama and used the colours consistently throughout the program.
+Teal - Is for input prompts
+Yellow - Is for errors
+Red - Is for
 
 
 ### Logo 
@@ -78,8 +90,24 @@ A frequent Visitor wants to be able to price new quotes and also get previous pr
 # Features 
 
 ### Existing Features
-Product Select
-Level Select
+- Into Page
+When the program loads the user is Greated with text welcoming them to the Renewal Calculator and an image of a calculator. There is a description of what the program does. It then gives the user two options they can either choose to start a new calculation or they can get access to historical data for their customer. 
+They are then prompted to enter which option they would like to go for by inputting 1 for new calculation or 2 for historical data.
+
+- New Calculation
+If the user selects to start a new calculation they are then prompted to enter their customer's name. There is a message outlining the format the customer name must take. If the customer name fits the convention then a message is printed telling the user that the customer name is accepted. If the user enters a format that is not accepted they will recieve and error message telling them the name they have entered is not valid and they will be prompted to re-enter the user name. 
+
+- Product Select
+Once the user has entered a customer name that is accepted by the system they will then be prompted to select the product their quote is for, either Toad or Kace. 
+If the enter anything other than Toad or Kace they will get an error stating Invalid input and they will be prompted to try again. 
+
+- Enter Amount
+The user is then prompted to enter the amount for last years renewal quote.
+
+-Level Select
+ Once they have entered the amount the user is then asked to select the level of support on the quote, is it standard, mid or premier. The product type and support level determine the pricing that is applied to the quote. 
+
+
 PPM Select
 Access stored data
 
