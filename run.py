@@ -369,8 +369,8 @@ def first_page():
     """
     print(Fore.GREEN + Style.BRIGHT + "Welcome to your Renewal Calculator!\n")
     print(Fore.MAGENTA + Style.BRIGHT + """\
-     _________
-    | ________ |
+     ----------
+    | -------- |
     ||12345678||
     |----------|
     |[M|#|C][-]|
@@ -378,7 +378,7 @@ def first_page():
     |[4|5|6][x]|
     |[1|2|3][%]|
     |[.|O|:][=]|
-     __________ \n""")
+     ----------\n""")
 
     print("This program lets you to enter last years")
     print("renewal cost and get this years uplifted price.")
