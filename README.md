@@ -70,7 +70,9 @@ A frequent Visitor wants to be able to price new quotes and also get previous pr
 
 As this is a terminal based application the level of detail for colour in this page are not that detailed. 
 I have imported colours from the Python library colorama and used the colours consistently throughout the program.
-Teal - Is for input prompts
+Green - Welcome msg
+Purple- Msg when user exits the application
+Teal - Is for input prompts and explanation
 Yellow - Is for errors
 Red - Is for
 
@@ -104,9 +106,15 @@ If the enter anything other than Toad or Kace they will get an error stating Inv
 - Enter Amount
 The user is then prompted to enter the amount for last years renewal quote.
 
--Level Select
- Once they have entered the amount the user is then asked to select the level of support on the quote, is it standard, mid or premier. The product type and support level determine the pricing that is applied to the quote. 
+- Level Select
+ Once they have entered the amount the user is then asked to select the level of support on the quote, is it standard, mid or premier. The product type and support level determine the pricing that is applied to the quote.
 
+- Print Calculation
+The program then checks the price the user has entered against a price book I have created in a google sheet. 
+ If the price is below what is in the google sheet an uplift is applied but if the user has entered a price that matches or is above the price that is in the price book the system will inform them that the  calculation can not be done as their quote had already reached list  price. 
+ If the price is below the list price then the applicable uplift will be applied and the price will be printed.
+
+ - PPM Calculation 
 
 PPM Select
 Access stored data

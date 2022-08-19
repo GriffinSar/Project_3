@@ -23,6 +23,7 @@ SHEET = GSPREAD_CLIENT.open('Sales_Program')
 price = SHEET.worksheet('Price')
 stored_info = SHEET.worksheet('database')
 
+"""Constant Variables for List  Pice for each Product and Support Level"""
 data_standard_toad = float(price.acell('C3').value)
 data_mid_toad = float(price.acell('C4').value)
 data_prem_toad = float(price.acell('C5').value)
@@ -82,7 +83,7 @@ def kace_stan():
             
 
             print("Would you like pricing for the second and third year? type Y/N")
-            multi_year = input("Y/N: ")
+            multi_year = input("Y/N:\n")
             global second_year
             second_year = cost /100 * 90 
             global third_year
@@ -115,7 +116,7 @@ def kace_mid():
         price of {data_mid_kace} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
-    multi_year = input("Y/N: ")
+    multi_year = input("Y/N:\n")
     global second_year
     second_year = cost /100 * 90 
     global third_year
@@ -145,7 +146,7 @@ def kace_prem():
         price of {data_prem_kace} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
-    multi_year = input("Y/N: ")
+    multi_year = input("Y/N:\n")
     global second_year
     second_year = cost /100 * 90 
     global third_year
@@ -165,7 +166,7 @@ def kace_prem():
 
 def kace_pricing():
     """function to uplift the price"""
-    level = str(input("Standard,Mid,Premiere: "))
+    level = str(input("Standard,Mid,Premiere:\n"))
 
     if level == "Standard":
         kace_stan()
@@ -194,7 +195,7 @@ def toad_stan():
             break
 
         print("Would you like pricing for the second and third year? type Y/N")
-        multi_year = input("Y/N: ")
+        multi_year = input("Y/N:\n")
         global second_year
         second_year = cost /100 * 90 
         global third_year
@@ -224,7 +225,7 @@ def toad_mid():
         price of {data_mid_toad} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
-    multi_year = input("Y/N: ")
+    multi_year = input("Y/N:\n")
     global second_year
     second_year = cost /100 * 90 
     global third_year
@@ -254,7 +255,7 @@ def toad_prem():
         price of {data_prem_toad} no uplift needed.")
 
     print("Would you like pricing for the second and third year? type Y/N")
-    multi_year = input("Y/N: ")
+    multi_year = input("Y/N:\n")
     global second_year
     second_year = cost /100 * 90 
     global third_year
@@ -289,11 +290,11 @@ def toad_pricing():
 
 def new_customer():
     print(Fore.CYAN + Style.BRIGHT + "To get started, please enter your\
-\ncustomer name.")
+    \ncustomer name.")
     print(Fore.CYAN + Style.BRIGHT + "Names must be between 2 and 15\
-\ncharacters,")
+    \ncharacters,")
     print(Fore.CYAN + Style.BRIGHT + "and should contain only letters from a\
-\nto z.")
+    \nto z.")
     
     global cust_name
     cust_name = input("Enter your customer name here:\n")
@@ -314,7 +315,7 @@ def new_customer():
 
     print(Fore.CYAN + Style.BRIGHT + "Please enter the cost of last years renewal quote.")
     global quote
-    quote = float(input("Amount: "))
+    quote = float(input("Amount:\n"))
 
     if type == "Toad":
         toad_pricing()   
@@ -363,10 +364,10 @@ def hist_data():
 
 
 def first_page():
-    """ 
-        Intro Page
     """
-    print(Fore.CYAN + Style.BRIGHT + "Welcome to your Renewal Calculator!\n")
+    Intro Page where the user can select the mode they want to use.
+    """
+    print(Fore.GREEN + Style.BRIGHT + "Welcome to your Renewal Calculator!\n")
     print(Fore.MAGENTA + Style.BRIGHT + """\
      _________
     | ________ |
@@ -387,11 +388,10 @@ def first_page():
     while True:
         print(Fore.CYAN + Style.BRIGHT + "Enter 1 if you want to start a new\
         \ncalculation.")
-        print(Fore.CYAN + Style.BRIGHT + "Enter 2 if you want to access historical\
-        \ndata for a customer")
+        print(Fore.CYAN + Style.BRIGHT + "Enter 2 if you want to access\
+        \nhistorical data for a customer")
 
         mode = input("Please enter your selection here:\n")
-    
         if mode == "1":
             new_customer()
             break
@@ -399,7 +399,6 @@ def first_page():
             hist_data()
             break
         else:
-            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
-            
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")         
 
 first_page()
