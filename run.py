@@ -9,6 +9,9 @@ import colorama
 from colorama import Fore, Style
 colorama.init(autoreset=True)
 import pandas as pd
+from rich.console import Console
+from rich.table import Table
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -31,25 +34,90 @@ data_standard_kace = float(price.acell('D3').value)
 data_mid_kace = float(price.acell('D4').value)
 data_prem_kace = float(price.acell('D5').value)
 
+
+
+def save_details():
+    """
+    Allow the user to save the details,
+    to the database for later.
+    """
+
+    while True:
+        print(Fore.LIGHTRED_EX + Style.BRIGHT +
+              "Would you like to save these details?\n")
+        print("Type 's' to save these details for future use.")
+        print("Type 'x' to return to the main menu.")
+        print("Type 'z' to exit calculator")
+
+        save = input("Enter your selection here:\n")
+        save = save.lower()
+        if save == "s":
+            list_details = [
+                cust_name, type, cost, second_year, third_year
+            ]
+            print("Saving your details...\n")
+            database = SHEET.worksheet('database')
+            database.append_row(list_details)
+            print(Fore.CYAN + Style.BRIGHT + "Your details have been saved to the database.\n")
+            print("\nTaking you to the main page...")
+            first_page()
+            break
+        elif save == "x":
+            first_page()
+            break
+        elif save == "z":
+            print("Thanks for using the calculator, goodbye!")
+            break
+        else:
+            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
+
 def multi(vue):
     print("Would you like pricing for the second and third year? type Y/N")
     multi_year = input("Y/N:\n")
     if multi_year == "Y":
+        global second_year
         second_year = vue /100 * 90 
+        global third_year
         third_year = vue /100 * 85
         print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
         print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
+        print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+        save_details()
     elif multi_year == "N":
         print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+        save_details()
     else:
         print("invalid input")
 
 def pricing_kace(product, support):
-    print("hello")
-
-def pricing_toad(product, support):
     """function to uplift the price"""
     value = float(input("Amount:\n"))
+    global cost 
+
+    if ((support == "s") and (product == "kace")\
+       and (value < data_standard_kace)):
+        global cost
+        cost = value * 1.05
+        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+        multi(cost)
+    elif ((support == "m") and (product == "kace")\
+       and (value < data_mid_kace)):
+        cost = value * 1.07
+        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+        multi(cost)
+    elif ((support == "p") and (product == "kace")\
+       and (value < data_mid_kace)):
+        cost = value * 1.09
+        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}") 
+        multi(cost)
+    else:
+        print("Your quote has reached list price no uplift")
+
+
+def pricing_toad(product, support, cust_name):
+    """function to uplift the price"""
+    value = float(input("Amount:\n"))
+    global cost
 
     if ((support == "s") and (product == "toad")\
        and (value < data_standard_toad)):
@@ -60,10 +128,12 @@ def pricing_toad(product, support):
        and (value < data_mid_toad)):
         cost = value * 1.06
         print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+        multi(cost)
     elif ((support == "p") and (product == "toad")\
        and (value < data_mid_toad)):
         cost = value * 1.08
-        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}") 
+        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+        multi(cost)
     else:
         print("Your quote has reached list price no uplift")
 
@@ -85,6 +155,7 @@ def new_customer():
         new_customer()
 
     print(Fore.CYAN + Style.BRIGHT + "Please enter your product: Toad or Kace")
+    global type
     type = input("Please enter your choice here:\n")
     type = type.lower()
 
@@ -106,9 +177,9 @@ def new_customer():
     
     
     if type == "toad":
-        pricing_toad(type, level)
+        pricing_toad(type, level, cust_name)
     elif type == "kace":
-        pricing_kace(type, level)
+        pricing_kace(type, level, cust_name)
     else:
         print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
         new_customer()
@@ -119,12 +190,31 @@ def hist_data():
     """
     cust_name = input("Enter your customer name here:\n")
 
+
     if stored_info.find(cust_name, in_column=1):
-         print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
+        print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
               "\nThe details you currently have saved are:\n")
-         df = pd.DataFrame(stored_info.get_all_records())
-         user_record = df.loc[df['Customer'] == cust_name].to_string(index=False)
-         print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{user_record}\n")
+        df = pd.DataFrame(stored_info.get_all_records())
+        user_record = df.loc[df['Customer'] == cust_name].to_string(index=False)
+        data = (Convert(user_record))
+
+        print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{user_record}\n")
+
+        table = Table(title = "Historical Data")
+
+        table.add_column("Name")
+        table.add_column("Product")
+        table.add_column("First Year")
+        table.add_column("Second Year")
+        table.add_column("Third Year")
+       
+        table.add_row(data[13], data[17], data[25], data[33], data[40])
+        
+        
+
+        console = Console()
+        console.print(table)
+        
 
     while True:
         print("What would you like to do now?")
@@ -149,6 +239,11 @@ def hist_data():
         "\nYou do not currently have any details stored.")
         print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
         first_page()
+
+
+def Convert(string):
+    li = list(string.split(" "))
+    return li
 
 
 def first_page():
@@ -188,5 +283,6 @@ def first_page():
             break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")         
+
 
 first_page()
