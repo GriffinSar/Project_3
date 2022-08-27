@@ -148,11 +148,15 @@ def new_customer():
     global cust_name
     cust_name = input("Enter your customer name here:\n")
 
-    if cust_name.isalpha() and len(cust_name) > 1 and len(cust_name) < 16:
-        print("Customer name accepted")
-    else:
-        print(Fore.LIGHTYELLOW_EX + "The name you have entered is not valid,please try again.")
+    if stored_info.find(cust_name, in_column=1):
+        print("Already Present")
         new_customer()
+    elif cust_name.isalpha() and len(cust_name) > 1 and len(cust_name) < 16:
+        print(Fore.LIGHTYELLOW_EX + "Customer name")
+    else:
+        print("Not accepted try again")
+        new_customer()
+        
 
     print(Fore.CYAN + Style.BRIGHT + "Please enter your product: Toad or Kace")
     global type
@@ -184,6 +188,7 @@ def new_customer():
         print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
         new_customer()
 
+
 def hist_data():
     """
     Allows user to view saved details
@@ -197,6 +202,7 @@ def hist_data():
         df = pd.DataFrame(stored_info.get_all_records())
         user_record = df.loc[df['Customer'] == cust_name].to_string(index=False)
         data = (Convert(user_record))
+        print(data)
 
         print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{user_record}\n")
 
