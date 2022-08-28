@@ -13,6 +13,7 @@ from rich.console import Console
 from rich.table import Table
 
 
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -79,10 +80,20 @@ def multi(vue):
         second_year = vue /100 * 90 
         global third_year
         third_year = vue /100 * 85
-        print(Fore.CYAN + Style.BRIGHT + f"Second year price {second_year}.")
-        print(Fore.CYAN + Style.BRIGHT + f"Third year price {third_year}.")
-        print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
+
+        table = Table(title = "Pricing")
+
+        table.add_column("First Year")
+        table.add_column("Second Year")
+        table.add_column("Third Year")
+
+        table.add_row(str(vue), str(second_year), str(third_year))
+
+        console = Console()
+        console.print(table)
+
         save_details()
+
     elif multi_year == "N":
         print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
         save_details()
@@ -116,13 +127,14 @@ def pricing_kace(product, support):
 
 def pricing_toad(product, support, cust_name):
     """function to uplift the price"""
+    console = Console()
     value = float(input("Amount:\n"))
     global cost
 
     if ((support == "s") and (product == "toad")\
        and (value < data_standard_toad)):
         cost = value * 1.04
-        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+        console.print(f"Your uplifted price is {cost}", style="yellow", justify = "center")
         multi(cost)
     elif ((support == "m") and (product == "toad")\
        and (value < data_mid_toad)):
@@ -139,22 +151,21 @@ def pricing_toad(product, support, cust_name):
 
     
 def new_customer():
-    print(Fore.CYAN + Style.BRIGHT + "To get started, please enter your\
-    \ncustomer name.")
-    print(Fore.CYAN + Style.BRIGHT + "Names must be between 2 and 15\
-    \ncharacters,")
-    print(Fore.CYAN + Style.BRIGHT + "and should contain only letters from a\
-    \nto z.")
+    console = Console()
+    console.print("To get started, please enter your\
+    \ncustomer name.", style = "bold bright_white", justify = "center")
+    console.print("Names must be between 2 and 15\
+    \ncharacters,", style = "bold bright_white", justify = "center")
+    console.print("and should contain only letters from a\
+    \nto z.", style = "bold bright_white", justify = "center")
     global cust_name
     cust_name = input("Enter your customer name here:\n")
+    cust_name = cust_name.lower()
 
-    if stored_info.find(cust_name, in_column=1):
-        print("Already Present")
-        new_customer()
-    elif cust_name.isalpha() and len(cust_name) > 1 and len(cust_name) < 16:
-        print(Fore.LIGHTYELLOW_EX + "Customer name")
+    if cust_name.isalpha() and len(cust_name) > 1 and len(cust_name) < 16:
+        print(Fore.LIGHTYELLOW_EX + "Customer name accepted")
     else:
-        print("Not accepted try again")
+        console.print("Not accepted try again", style= "bright_yellow")
         new_customer()
         
 
@@ -170,8 +181,8 @@ def new_customer():
         new_customer()
 
     print(Fore.CYAN + Style.BRIGHT + "Please enter the support level of your quote\
-    \n's' for Standard, 'm' for Mid and 'p' for Premiere")
-    level = str(input("s,m or p: "))
+    \n'S' for Standard, 'M' for Mid and 'P' for Premiere")
+    level = str(input("S,M or P: "))
     level = level.lower()
     if ((level == "s") or (level == "m") or (level == "p")):
         print("Support level accepted")
@@ -193,40 +204,25 @@ def hist_data():
     """
     Allows user to view saved details
     """
-    cust_name = input("Enter your customer name here:\n")
-
+    cust_name = str(input(Fore.LIGHTGREEN_EX + Style.BRIGHT +\
+         "Enter your customer name here:\n"))
+    cust_name = cust_name.lower()
 
     if stored_info.find(cust_name, in_column=1):
         print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
               "\nThe details you currently have saved are:\n")
         df = pd.DataFrame(stored_info.get_all_records())
-        user_record = df.loc[df['Customer'] == cust_name].to_string(index=False)
-        data = (Convert(user_record))
-        print(data)
+        user_record = df.loc[df['Customer'] == cust_name]\
+            .to_string(index=False)
 
-        print(f"{Fore.LIGHTCYAN_EX }{Style.BRIGHT}\n{user_record}\n")
-
-        table = Table(title = "Historical Data")
-
-        table.add_column("Name")
-        table.add_column("Product")
-        table.add_column("First Year")
-        table.add_column("Second Year")
-        table.add_column("Third Year")
-       
-        table.add_row(data[13], data[17], data[25], data[33], data[40])
+        print(f"{Fore.MAGENTA }{Style.BRIGHT}\n{user_record}\n")
         
-        
-
-        console = Console()
-        console.print(table)
-        
-
     while True:
-        print("What would you like to do now?")
-        print("Type 'a' to check another customer.")
-        print("Type 'b' to return to the main menu.")
-        print("Type 'c' to exit the renewal calculator")
+        console = Console()
+        console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
+        console.print("Type 'a' to check another customer.", style = "bold sea_green2", justify = "center")
+        console.print("Type 'b' to return to the main menu.", style = "bold sea_green2", justify = "center")
+        console.print("Type 'c' to exit the renewal calculator", style = "bold sea_green2", justify = "center")
 
         selection = input("Enter your selection here:\n")
         selection = selection.lower()
@@ -247,40 +243,35 @@ def hist_data():
         first_page()
 
 
-def Convert(string):
-    li = list(string.split(" "))
-    return li
-
 
 def first_page():
     """
     Intro Page where the user can select the mode they want to use.
     """
-    print(Fore.GREEN + Style.BRIGHT + "Welcome to your Renewal Calculator!\n")
-    print(Fore.MAGENTA + Style.BRIGHT + """\
+    console = Console()
+    console.print("Welcome to your Renewal Calculator!\n", style = "underline bold", justify = "center")
+    console.print("""\
      ----------
     | -------- |
     ||12345678||
     |----------|
     |[M|#|C][-]|
     |[7|8|9][+]|
-    |[4|5|6][x]|
+    |[4|5|6][%]|
     |[1|2|3][%]|
     |[.|O|:][=]|
-     ----------\n""")
+     ----------\n""", justify = "center")
 
-    print("This program lets you to enter last years")
-    print("renewal cost and get this years uplifted price.")
-    print("Along with multi-year pricing.\n")
-    print("You can also save and retrieve customer pricing details")
-
+    console.print("This program lets you to enter last years", style = "bold medium_purple", justify = "center")
+    console.print("renewal cost and get this years uplifted price.", style = "bold medium_purple", justify = "center")
+    console.print("Along with multi-year pricing.", style = "bold medium_purple", justify = "center")
+    console.print("You can also save and retrieve customer pricing details", style = "bold medium_purple", justify = "center")
+    
     while True:
-        print(Fore.CYAN + Style.BRIGHT + "Enter 1 if you want to start a new\
-        \ncalculation.")
-        print(Fore.CYAN + Style.BRIGHT + "Enter 2 if you want to access\
-        \nhistorical data for a customer")
+        console.print("Enter 1 if you want to start a new calculation.", style = "bright_white", justify = "center")
+        console.print("Enter 2 if you want to access historical data for a customer\n", style = "bright_white", justify = "center")
 
-        mode = input("Please enter your selection here:\n")
+        mode = input(Fore.GREEN + "Please enter your selection here:\n")
         if mode == "1":
             new_customer()
             break
@@ -288,7 +279,8 @@ def first_page():
             hist_data()
             break
         else:
-            print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")         
+            console.print("Invalid input, exiting calculator.\n", style = "bright_yellow", justify= "center")
+            break        
 
 
 first_page()
