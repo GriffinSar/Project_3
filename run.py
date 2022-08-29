@@ -6,7 +6,6 @@ Connects APIs and allow access via credentials file
 import gspread 
 from google.oauth2.service_account import Credentials
 import colorama
-import rich
 from colorama import Fore, Style
 colorama.init(autoreset=True)
 import pandas as pd
