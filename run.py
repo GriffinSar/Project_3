@@ -148,8 +148,26 @@ def pricing_toad(product, support, cust_name):
         print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
         multi(cost)
     else:
-        print("Your quote has reached list price no uplift")
+        console.print("Your quote has reached list price no uplift\n", style= "red", justify= "center")
+        while True:
+            console = Console()
+            console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
+            console.print("Type 'a' to start another calculation.", style = "bold bright_white", justify = "center")
+            console.print("Type 'b' to return to the main menu.", style = "bold bright_white", justify = "center")
+            console.print("Type 'c' to exit the renewal calculator\n", style = "bold bright_white", justify = "center")
 
+            selection = input(Fore.GREEN + Style.BRIGHT + "Enter your selection here:\n")
+            selection = selection.lower()
+
+            if selection == "a":
+                new_customer()
+            elif selection == "b":
+                first_page()
+            elif selection == "c":
+                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\
+            \nThank you for using the calculator and goodbye.")
+            break
+            time.sleep(3)
     
 def new_customer():
     console = Console()
@@ -211,8 +229,8 @@ def hist_data():
     cust_name = cust_name.lower()
 
     if stored_info.find(cust_name, in_column=1):
-        print(Fore.LIGHTGREEN_EX + Style.BRIGHT +
-              "\nThe details you currently have saved are:\n")
+        console = Console()
+        console.print("\nThe details you currently have saved are:\n", style= "white", justify= "center")
         df = pd.DataFrame(stored_info.get_all_records())
         user_record = df.loc[df['Customer'] == cust_name]\
             .to_string(index=False)
@@ -274,7 +292,8 @@ def first_page():
     
     while True:
         console.print("Enter 1 if you want to start a new calculation.", style = "bright_white", justify = "center")
-        console.print("Enter 2 if you want to access historical data for a customer\n", style = "bright_white", justify = "center")
+        console.print("Enter 2 if you want to access historical data for a customer", style = "bright_white", justify = "center")
+        console.print("Enter 3 if you want to exit the calculator\n", style = "bright_white", justify = "center")
 
         mode = input(Fore.GREEN + Style.BRIGHT + "Please enter your selection here:\n")
         if mode == "1":
@@ -283,9 +302,12 @@ def first_page():
         elif mode == "2":
             hist_data()
             break
-        else:
-            console.print("Invalid input, exiting calculator.\n", style = "bright_yellow", justify= "center")
+        elif mode == "3":
+            console.print("Exiting calculator.\n", style = "bright_yellow", justify= "center")
             break        
+        else:
+            console.print("Invalid input, try again .\n", style = "bright_yellow", justify= "center")
+            first_page()
 
-
+            
 first_page()
