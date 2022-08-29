@@ -6,6 +6,7 @@ Connects APIs and allow access via credentials file
 import gspread 
 from google.oauth2.service_account import Credentials
 import colorama
+import rich
 from colorama import Fore, Style
 colorama.init(autoreset=True)
 import pandas as pd
@@ -182,7 +183,7 @@ def new_customer():
 
     console.print("Please enter the support level of your quote\
     \n'S' for Standard, 'M' for Mid and 'P' for Premiere", style = "bright_white bold")
-    level = input(Fore.GREEN + Style.BRIGHT + "S,M or P:\n")
+    level = input(Fore.GREEN + Style.BRIGHT + "S,M or P:\n ")
     level = level.lower()
     if ((level == "s") or (level == "m") or (level == "p")):
         console.print("Support level accepted", style= "bright_yellow", justify= "center")
