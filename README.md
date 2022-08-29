@@ -12,7 +12,7 @@
     - [Logo](#logo)
     - [Typography](#typography)
     - [Imagery](#imagery)
-- [Wireframes](#wire-frames)
+- [Flow-Chart](#flow-chart)
 - [Features](#features)
     - [Existing-Features](#existing-features)
     - [Features-left-to-Implement](#features-left-to-implement)
@@ -86,38 +86,45 @@ Red - Is for
 ### Imagery
 
 
-# Wire frames
+# Flow Charts
+![chart1](images/chart-1%20.png)
+![chart2](images/chart-2.png)
 
 
 # Features 
 
-### Existing Features
-- Into Page
+## Existing Features
+
+### Into Page
 When the program loads the user is Greated with text welcoming them to the Renewal Calculator and an image of a calculator. There is a description of what the program does. It then gives the user two options they can either choose to start a new calculation or they can get access to historical data for their customer. 
 They are then prompted to enter which option they would like to go for by inputting 1 for new calculation or 2 for historical data.
 
-- New Calculation
+### New Calculation
 If the user selects to start a new calculation they are then prompted to enter their customer's name. There is a message outlining the format the customer name must take. If the customer name fits the convention then a message is printed telling the user that the customer name is accepted. If the user enters a format that is not accepted they will recieve and error message telling them the name they have entered is not valid and they will be prompted to re-enter the user name. 
 
-- Product Select
+### Product Select
 Once the user has entered a customer name that is accepted by the system they will then be prompted to select the product their quote is for, either Toad or Kace. 
 If the enter anything other than Toad or Kace they will get an error stating Invalid input and they will be prompted to try again. 
 
-- Enter Amount
-The user is then prompted to enter the amount for last years renewal quote.
-
-- Level Select
+### Level Select
  Once they have entered the amount the user is then asked to select the level of support on the quote, is it standard, mid or premier. The product type and support level determine the pricing that is applied to the quote.
 
-- Print Calculation
+### Enter Amount
+The user is then prompted to enter the amount for last years renewal quote.
+
+
+### Print Calculation
 The program then checks the price the user has entered against a price book I have created in a google sheet. 
+
+![pricebook](images/price-book.png)
+
  If the price is below what is in the google sheet an uplift is applied but if the user has entered a price that matches or is above the price that is in the price book the system will inform them that the  calculation can not be done as their quote had already reached list  price. 
  If the price is below the list price then the applicable uplift will be applied and the price will be printed.
 
- - PPM Calculation 
+## PPM Calculation 
 
-PPM Select
-Access stored data
+### PPM Select
+### Access stored data
 
 
 
@@ -156,7 +163,9 @@ Currency converter
 - google sheets
 - excel 
 - pandas (Data manipulation)
-- https://pypi.org/project/colorama/  (Api for adding colour to text)
+- Colorama https://pypi.org/project/colorama/  (Api for adding colour to text)
+- Rich api (Style for text)
+
 
 
 # Acknowledgements

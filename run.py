@@ -11,8 +11,7 @@ colorama.init(autoreset=True)
 import pandas as pd
 from rich.console import Console
 from rich.table import Table
-
-
+import time
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -128,7 +127,8 @@ def pricing_kace(product, support):
 def pricing_toad(product, support, cust_name):
     """function to uplift the price"""
     console = Console()
-    value = float(input("Amount:\n"))
+    console.print("Please enter last years renewal price", style= "bright_white bold")
+    value = float(input(Fore.GREEN + Style.BRIGHT + "Amount:\n"))
     global cost
 
     if ((support == "s") and (product == "toad")\
@@ -159,33 +159,33 @@ def new_customer():
     console.print("and should contain only letters from a\
     \nto z.", style = "bold bright_white", justify = "center")
     global cust_name
-    cust_name = input("Enter your customer name here:\n")
+    cust_name = input(Fore.GREEN + Style.BRIGHT + "Enter your customer name here:\n")
     cust_name = cust_name.lower()
 
     if cust_name.isalpha() and len(cust_name) > 1 and len(cust_name) < 16:
-        print(Fore.LIGHTYELLOW_EX + "Customer name accepted")
+        console.print("Customer name accepted", style= "bright_yellow", justify= "center")
     else:
-        console.print("Not accepted try again", style= "bright_yellow")
+        console.print("Not accepted try again", style= "bold bright_red")
         new_customer()
         
 
-    print(Fore.CYAN + Style.BRIGHT + "Please enter your product: Toad or Kace")
+    console.print("Please enter your product: Toad or Kace", style= "bright_white bold")
     global type
-    type = input("Please enter your choice here:\n")
+    type = input(Fore.GREEN + Style.BRIGHT + "Please enter your choice here:\n")
     type = type.lower()
 
     if ((type == "toad") or (type == "kace")):
-        print("Product accepted")
+        console.print("Product accepted", style= "bright_yellow", justify= "center")
     else:
         print(Fore.LIGHTYELLOW_EX + "The product is not valid,please try again.")
         new_customer()
 
-    print(Fore.CYAN + Style.BRIGHT + "Please enter the support level of your quote\
-    \n'S' for Standard, 'M' for Mid and 'P' for Premiere")
-    level = str(input("S,M or P: "))
+    console.print("Please enter the support level of your quote\
+    \n'S' for Standard, 'M' for Mid and 'P' for Premiere", style = "bright_white bold")
+    level = input(Fore.GREEN + Style.BRIGHT + "S,M or P:\n")
     level = level.lower()
     if ((level == "s") or (level == "m") or (level == "p")):
-        print("Support level accepted")
+        console.print("Support level accepted", style= "bright_yellow", justify= "center")
     else:
         print(Fore.LIGHTYELLOW_EX + "The support level is not valid,please try again.")
         new_customer()
@@ -217,32 +217,32 @@ def hist_data():
 
         print(f"{Fore.MAGENTA }{Style.BRIGHT}\n{user_record}\n")
         
-    while True:
-        console = Console()
-        console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
-        console.print("Type 'a' to check another customer.", style = "bold sea_green2", justify = "center")
-        console.print("Type 'b' to return to the main menu.", style = "bold sea_green2", justify = "center")
-        console.print("Type 'c' to exit the renewal calculator", style = "bold sea_green2", justify = "center")
+        while True:
+            console = Console()
+            console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
+            console.print("Type 'a' to check another customer.", style = "bold bright_white", justify = "center")
+            console.print("Type 'b' to return to the main menu.", style = "bold bright_white", justify = "center")
+            console.print("Type 'c' to exit the renewal calculator", style = "bold bright_white", justify = "center")
 
-        selection = input("Enter your selection here:\n")
-        selection = selection.lower()
+            selection = input(Fore.GREEN + Style.BRIGHT + "Enter your selection here:\n")
+            selection = selection.lower()
 
-        if selection == "a":
-            hist_data()
-        elif selection == "b":
-            first_page()
-        elif selection == "c":
-            print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\
-        \nThank you for using the calculator and goodbye.")
-        break
+            if selection == "a":
+                hist_data()
+            elif selection == "b":
+                first_page()
+            elif selection == "c":
+                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\
+            \nThank you for using the calculator and goodbye.")
+            break
 
     else:
-        print(Fore.LIGHTYELLOW_EX +
-        "\nYou do not currently have any details stored.")
-        print(Fore.LIGHTYELLOW_EX + "Returning to the main menu...")
+        console = Console()
+        time.sleep(2)
+        console.print("You do not currently have any details stored.", style = "yellow bold")
+        console.print("Returning to the main menu...")
         first_page()
-
-
+    
 
 def first_page():
     """
@@ -271,7 +271,7 @@ def first_page():
         console.print("Enter 1 if you want to start a new calculation.", style = "bright_white", justify = "center")
         console.print("Enter 2 if you want to access historical data for a customer\n", style = "bright_white", justify = "center")
 
-        mode = input(Fore.GREEN + "Please enter your selection here:\n")
+        mode = input(Fore.GREEN + Style.BRIGHT + "Please enter your selection here:\n")
         if mode == "1":
             new_customer()
             break
