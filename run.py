@@ -53,12 +53,13 @@ def save_details():
         save = save.lower()
         if save == "s":
             list_details = [
-                cust_name, type, cost, second_year, third_year
+                cust_name, type, level, cost, second_year, third_year
             ]
             print("Saving your details...\n")
             database = SHEET.worksheet('database')
             database.append_row(list_details)
-            print(Fore.CYAN + Style.BRIGHT + "Your details have been saved to the database.\n")
+            print(Fore.CYAN + Style.BRIGHT + "Your details have been saved to\
+            \nthe database.")
             print("\nTaking you to the main page...")
             first_page()
             break
@@ -182,6 +183,7 @@ def new_customer():
 
     console.print("Please enter the support level of your quote\
     \n'S' for Standard, 'M' for Mid and 'P' for Premiere", style = "bright_white bold")
+    global level
     level = input(Fore.GREEN + Style.BRIGHT + "S,M or P:\n ")
     level = level.lower()
     if ((level == "s") or (level == "m") or (level == "p")):
@@ -205,7 +207,7 @@ def hist_data():
     Allows user to view saved details
     """
     cust_name = str(input(Fore.LIGHTGREEN_EX + Style.BRIGHT +\
-         "Enter your customer name here:\n"))
+        "Enter your customer name here:\n"))
     cust_name = cust_name.lower()
 
     if stored_info.find(cust_name, in_column=1):
@@ -216,7 +218,8 @@ def hist_data():
             .to_string(index=False)
 
         print(f"{Fore.MAGENTA }{Style.BRIGHT}\n{user_record}\n")
-        
+        time.sleep(3)
+
         while True:
             console = Console()
             console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
@@ -235,12 +238,14 @@ def hist_data():
                 print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\
             \nThank you for using the calculator and goodbye.")
             break
+            time.sleep(3)
 
     else:
         console = Console()
         time.sleep(2)
-        console.print("You do not currently have any details stored.", style = "yellow bold")
-        console.print("Returning to the main menu...")
+        console.print("You do not currently have any details stored.", style = "bright_white bold", justify= "center")
+        console.print("Returning to the main menu...\n\n\n", style = "bright_white bold", justify= "center")
+        time.sleep(2)
         first_page()
     
 
@@ -262,10 +267,10 @@ def first_page():
     |[.|O|:][=]|
      ----------\n""", justify = "center")
 
-    console.print("This program lets you to enter last years", style = "bold medium_purple", justify = "center")
-    console.print("renewal cost and get this years uplifted price.", style = "bold medium_purple", justify = "center")
-    console.print("Along with multi-year pricing.", style = "bold medium_purple", justify = "center")
-    console.print("You can also save and retrieve customer pricing details", style = "bold medium_purple", justify = "center")
+    console.print("This program lets you to enter last years", style = "bold purple", justify = "center")
+    console.print("renewal cost and get this years uplifted price.", style = "bold purple", justify = "center")
+    console.print("Along with multi-year pricing.", style = "bold purple", justify = "center")
+    console.print("You can also save and retrieve customer pricing details\n", style = "bold purple", justify = "center")
     
     while True:
         console.print("Enter 1 if you want to start a new calculation.", style = "bright_white", justify = "center")
