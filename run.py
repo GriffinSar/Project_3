@@ -127,28 +127,29 @@ def pricing_kace(product, support):
 
 def pricing_toad(product, support, cust_name):
     """function to uplift the price"""
+    global cost
     console = Console()
     console.print("Please enter last years renewal price", style= "bright_white bold")
-    value = float(input(Fore.GREEN + Style.BRIGHT + "Amount:\n"))
-    global cost
-
-    if ((support == "s") and (product == "toad")\
-       and (value < data_standard_toad)):
-        cost = value * 1.04
-        console.print(f"Your uplifted price is {cost}", style="yellow", justify = "center")
-        multi(cost)
-    elif ((support == "m") and (product == "toad")\
-       and (value < data_mid_toad)):
-        cost = value * 1.06
-        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
-        multi(cost)
-    elif ((support == "p") and (product == "toad")\
-       and (value < data_mid_toad)):
-        cost = value * 1.08
-        print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
-        multi(cost)
-    else:
-        console.print("Your quote has reached list price no uplift\n", style= "red", justify= "center")
+    value = input(Fore.GREEN + Style.BRIGHT + "Amount:\n")
+    if value.isdigit():
+        value = float(value)
+        if ((support == "s") and (product == "toad")\
+        and (value < data_standard_toad)):
+            cost = value * 1.04
+            console.print(f"Your uplifted price is {cost}", style="yellow", justify = "center")
+            multi(cost)
+        elif ((support == "m") and (product == "toad")\
+        and (value < data_mid_toad)):
+            cost = value * 1.06
+            print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+            multi(cost)
+        elif ((support == "p") and (product == "toad")\
+        and (value < data_mid_toad)):
+            cost = value * 1.08
+            print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+            multi(cost)
+        else:
+            console.print("Your quote has reached list price no uplift\n", style= "red", justify= "center")
         while True:
             console = Console()
             console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
@@ -168,6 +169,11 @@ def pricing_toad(product, support, cust_name):
             \nThank you for using the calculator and goodbye.")
             break
             time.sleep(3)
+    else:
+        print("no")
+        pricing_toad(product, support, cust_name)
+
+    
     
 def new_customer():
     console = Console()
