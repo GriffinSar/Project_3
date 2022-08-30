@@ -149,12 +149,12 @@ def pricing_toad(product, support, cust_name):
             multi(cost)
         elif ((support == "m") and (product == "toad")\
         and (value < data_mid_toad)):
-            cost = value * 1.06
+            cost = value * 1.05
             console.print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
             multi(cost)
         elif ((support == "p") and (product == "toad")\
         and (value < data_mid_toad)):
-            cost = value * 1.08
+            cost = value * 1.07
             print(f"Your uplifted price is {cost}", style= "yellow bold underline")
             multi(cost)
         else:

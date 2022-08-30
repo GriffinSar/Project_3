@@ -35,8 +35,9 @@
 # Sales Calculator
 
 ### Purpose
-The purpose of this site is to provide the user with pricing for thier renewal quotes. They input some details, the price, level and product and the system will provide them with the new pricing for this years quote. They can also choose to get the pricing for a 2 year and 3 year quote so they can easily provide all options to the customer.
+The purpose of this site is to provide the user with pricing for their renewal quotes. It has specifically created for renewal representitives who work for Quest Software. They input some details, the price, level and product and the system will provide them with the new pricing for this years quote. They can also choose to get the pricing for a 2 year and 3 year quote so they can easily provide all options to the customer.
 This program also stores the customer data so that the user can access previous quote prices for their reference. 
+The purpose of this site is to streamline the renewal process for these sales representitives. Many of thier quotes need to be manually priced so this site can help them to work out the pricing of a quote in a more efficient way.
 
 # Target Audience
 The Target Audience for this website is sales reps specifically the sales reps who work for my current employer Quest software. These reps have a number of manual calculatitons that needs to be done to prepare a quote for their customer, this has to be done for thousands of quotes every three months. Part of my role in the past was to price these quotes for the reps. There is a definate need here for something that makes the process easier and more streamlined. This app is designed to take away some of this manual work so that the sales rep can concentrate on selling the products to the customer rather than focusing so much time on administration work.
@@ -70,21 +71,12 @@ A frequent Visitor wants to be able to price new quotes and also get previous pr
 
 As this is a terminal based application the level of detail for colour in this page are not that detailed. 
 I have imported colours from the Python library colorama and used the colours consistently throughout the program.
-Green - Welcome msg
-Purple- Msg when user exits the application
-Teal - Is for input prompts and explanation
-Yellow - Is for errors
-Red - Is for
-
-
-### Logo 
-
-
-### Typography
-
+Green - All input messages are green to make then stand out
+Yellow - confirmation messages to the user are yellow
 
 ### Imagery
 
+I have used an image of a calculator, it is just a simple image but draws the users eye and helps their understanding of the purpose  of the site.
 
 # Flow Charts
 ![chart1](images/chart-1%20.png)
@@ -121,20 +113,20 @@ The program then checks the price the user has entered against a price book I ha
  If the price is below what is in the google sheet an uplift is applied but if the user has entered a price that matches or is above the price that is in the price book the system will inform them that the  calculation can not be done as their quote had already reached list  price. 
  If the price is below the list price then the applicable uplift will be applied and the price will be printed.
 
-## PPM Calculation 
+### PPM Calculation 
 
-### PPM Select
+### Save 
+
 ### Access stored data
 
 
 
 ### Features Left to Implement
-Currency converter
+Currency converter. I hope in future to implement a currency converter as part of this renewal calculator.
 
 # Testing 
 
 ## Manual Testing
-
 
 
 
@@ -146,7 +138,6 @@ Currency converter
 
 ## Deployment
 
-# Credits 
 
 ### Content 
 
@@ -154,8 +145,9 @@ Currency converter
 - All the business information was created by me.
 
 ### Media
-
-### Code
+- https://realpython.com/python-exceptions/ (Reference for exception handling)
+- https://peps.python.org/pep-0008/
+- https://github.com/Textualize/rich
 
 
 ### Technologies
