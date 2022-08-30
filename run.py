@@ -35,7 +35,6 @@ data_mid_kace = float(price.acell('D4').value)
 data_prem_kace = float(price.acell('D5').value)
 
 
-
 def save_details():
     """
     Allow the user to save the details,
@@ -72,7 +71,13 @@ def save_details():
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
+
 def multi(vue):
+    """
+    Function that calculates a second and third year price for the user based on the 
+    uplifted one year price
+    """
+    
     print("Would you like pricing for the second and third year? type Y/N")
     multi_year = input("Y/N:\n")
     if multi_year == "Y":
@@ -95,10 +100,12 @@ def multi(vue):
         save_details()
 
     elif multi_year == "N":
-        print(Fore.CYAN + Style.BRIGHT + "Directing to save page")
-        save_details()
+        print(Fore.CYAN + Style.BRIGHT + "Directing to home page")
+        time.sleep(2)
+        first_page()
     else:
         print("invalid input")
+
 
 def pricing_kace(product, support):
     """function to uplift the price"""
@@ -126,27 +133,29 @@ def pricing_kace(product, support):
 
 
 def pricing_toad(product, support, cust_name):
-    """function to uplift the price"""
+    """function to uplift the price of the previous renewal"""
     global cost
+
     console = Console()
     console.print("Please enter last years renewal price", style= "bright_white bold")
+
     value = input(Fore.GREEN + Style.BRIGHT + "Amount:\n")
     if value.isdigit():
         value = float(value)
         if ((support == "s") and (product == "toad")\
         and (value < data_standard_toad)):
             cost = value * 1.04
-            console.print(f"Your uplifted price is {cost}", style="yellow", justify = "center")
+            console.print(f"Your uplifted price is {cost}", style="yellow underline bold", justify = "center")
             multi(cost)
         elif ((support == "m") and (product == "toad")\
         and (value < data_mid_toad)):
             cost = value * 1.06
-            print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+            console.print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
             multi(cost)
         elif ((support == "p") and (product == "toad")\
         and (value < data_mid_toad)):
             cost = value * 1.08
-            print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+            print(f"Your uplifted price is {cost}", style= "yellow bold underline")
             multi(cost)
         else:
             console.print("Your quote has reached list price no uplift\n", style= "red", justify= "center")
@@ -170,12 +179,15 @@ def pricing_toad(product, support, cust_name):
             break
             time.sleep(3)
     else:
-        print("no")
+        print("Not a valid input please try again.")
         pricing_toad(product, support, cust_name)
 
-    
-    
+       
 def new_customer():
+    """
+    Function to let user enter their details along with quote type so they can be 
+    directed to the correct calculation"""
+
     console = Console()
     console.print("To get started, please enter your\
     \ncustomer name.", style = "bold bright_white", justify = "center")
@@ -183,6 +195,7 @@ def new_customer():
     \ncharacters,", style = "bold bright_white", justify = "center")
     console.print("and should contain only letters from a\
     \nto z.", style = "bold bright_white", justify = "center")
+
     global cust_name
     cust_name = input(Fore.GREEN + Style.BRIGHT + "Enter your customer name here:\n")
     cust_name = cust_name.lower()
@@ -228,7 +241,7 @@ def new_customer():
 
 def hist_data():
     """
-    Allows user to view saved details
+    Function that  lets the user enter details to access saved data
     """
     cust_name = str(input(Fore.LIGHTGREEN_EX + Style.BRIGHT +\
         "Enter your customer name here:\n"))
