@@ -145,17 +145,29 @@ def pricing_toad(product, support, cust_name):
         if ((support == "s") and (product == "toad")\
         and (value < data_standard_toad)):
             cost = value * 1.04
-            console.print(f"Your uplifted price is {cost}", style="yellow underline bold", justify = "center")
+            table = Table(title="Uplift")
+            table.add_column("Uplifted price")
+            table.add_row(str(cost))
+            console = Console()
+            console.print(table)
             multi(cost)
         elif ((support == "m") and (product == "toad")\
         and (value < data_mid_toad)):
             cost = value * 1.05
-            console.print(Fore.CYAN + Style.BRIGHT + f"Your uplifted price is {cost}")
+            table = Table(title="Uplift")
+            table.add_column("Uplifted price")
+            table.add_row(str(cost))
+            console = Console()
+            console.print(table)
             multi(cost)
         elif ((support == "p") and (product == "toad")\
         and (value < data_mid_toad)):
             cost = value * 1.07
-            print(f"Your uplifted price is {cost}", style= "yellow bold underline")
+            table = Table(title="Uplift")
+            table.add_column("Uplifted price")
+            table.add_row(str(cost))
+            console = Console()
+            console.print(table)
             multi(cost)
         else:
             console.print("Your quote has reached list price no uplift\n", style= "red", justify= "center")

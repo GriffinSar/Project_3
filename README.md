@@ -71,16 +71,17 @@ A frequent Visitor wants to be able to price new quotes and also get previous pr
 
 As this is a terminal based application the level of detail for colour in this page are not that detailed. 
 I have imported colours from the Python library colorama and used the colours consistently throughout the program.
-Green - All input messages are green to make then stand out
-Yellow - confirmation messages to the user are yellow
+- Green - All input messages are green to make then stand out
+- Yellow - confirmation messages to the user are yellow
 
 ### Imagery
 
 I have used an image of a calculator, it is just a simple image but draws the users eye and helps their understanding of the purpose  of the site.
 
+![calculator](images/calculator.png)
+
 # Flow Charts
-![chart1](images/chart-1%20.png)
-![chart2](images/chart-2.png)
+![chart](images/chart.png)
 
 
 # Features 
@@ -90,6 +91,9 @@ I have used an image of a calculator, it is just a simple image but draws the us
 ### Into Page
 When the program loads the user is Greated with text welcoming them to the Renewal Calculator and an image of a calculator. There is a description of what the program does. It then gives the user two options they can either choose to start a new calculation or they can get access to historical data for their customer. 
 They are then prompted to enter which option they would like to go for by inputting 1 for new calculation or 2 for historical data.
+
+![intro](images/intro-page.png)
+
 
 ### New Calculation
 If the user selects to start a new calculation they are then prompted to enter their customer's name. There is a message outlining the format the customer name must take. If the customer name fits the convention then a message is printed telling the user that the customer name is accepted. If the user enters a format that is not accepted they will recieve and error message telling them the name they have entered is not valid and they will be prompted to re-enter the user name. 
@@ -113,12 +117,21 @@ The program then checks the price the user has entered against a price book I ha
  If the price is below what is in the google sheet an uplift is applied but if the user has entered a price that matches or is above the price that is in the price book the system will inform them that the  calculation can not be done as their quote had already reached list  price. 
  If the price is below the list price then the applicable uplift will be applied and the price will be printed.
 
+ ![uplift](images/uplifted-price.png)
+
 ### PPM Calculation 
 
+The user can also have the system calculate the price for a second and third year. This is calculated at 90% of the 1 year price for the second year and 85% of the one year price for the third year. This is following the pricing guidelines that the reps in my company follow, the discount is applied to incentivies customers to renew for more than one year. So this calculator quickly presents the pricing for all three years.
+
+ ![ppm](images/ppm-pricing.png)
+
 ### Save 
+The usesr is then prompted to either save their details or exit. If they choose the save the details are saved to a google sheet. They can then be accessed by the user at a later date by entering the customer name.
 
 ### Access stored data
+The user can enter the customer  name and any saved details for this customer will be printed to the terminal. It gives the customer name, product, supporot level and the pricing for One, Two and three years. 
 
+ ![saved](images/saved-details.png)
 
 
 ### Features Left to Implement
