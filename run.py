@@ -46,7 +46,6 @@ def save_details():
               "Would you like to save these details?\n")
         print("Type 's' to save these details for future use.")
         print("Type 'x' to return to the main menu.")
-        print("Type 'z' to exit calculator")
 
         save = input("Enter your selection here:\n")
         save = save.lower()
@@ -61,13 +60,8 @@ def save_details():
             \nthe database.")
             print("\nTaking you to the main page...")
             first_page()
-            break
         elif save == "x":
             first_page()
-            break
-        elif save == "z":
-            print("Thanks for using the calculator, goodbye!")
-            break
         else:
             print(Fore.LIGHTYELLOW_EX + "Invalid input, please try again.\n")
 
@@ -139,11 +133,10 @@ def pricing_toad(product, support, cust_name):
     console = Console()
     console.print("Please enter last years renewal price", style= "bright_white bold")
 
-    value = input(Fore.GREEN + Style.BRIGHT + "Amount:\n")
-    if value.isdigit():
-        value = float(value)
-        if ((support == "s") and (product == "toad")\
-        and (value < data_standard_toad)):
+    
+    try:
+        value = float(input(Fore.GREEN + Style.BRIGHT + "Amount:\n"))
+        if ((support == "s") and (value < data_standard_toad)):
             cost = value * 1.04
             table = Table(title="Uplift")
             table.add_column("Uplifted price")
@@ -151,8 +144,7 @@ def pricing_toad(product, support, cust_name):
             console = Console()
             console.print(table)
             multi(cost)
-        elif ((support == "m") and (product == "toad")\
-        and (value < data_mid_toad)):
+        elif ((support == "m") and (value < data_mid_toad)):
             cost = value * 1.05
             table = Table(title="Uplift")
             table.add_column("Uplifted price")
@@ -160,8 +152,7 @@ def pricing_toad(product, support, cust_name):
             console = Console()
             console.print(table)
             multi(cost)
-        elif ((support == "p") and (product == "toad")\
-        and (value < data_mid_toad)):
+        elif ((support == "p") and (value < data_mid_toad)):
             cost = value * 1.07
             table = Table(title="Uplift")
             table.add_column("Uplifted price")
@@ -171,6 +162,12 @@ def pricing_toad(product, support, cust_name):
             multi(cost)
         else:
             console.print("Your quote has reached list price no uplift\n", style= "red", justify= "center")
+    except ValueError:
+        print(Fore.LIGHTYELLOW_EX + "The values you have entered are not in \
+the correct format, please try again.\n")
+        pricing_toad(product, support, cust_name)
+ 
+
         while True:
             console = Console()
             console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
@@ -190,9 +187,6 @@ def pricing_toad(product, support, cust_name):
             \nThank you for using the calculator and goodbye.")
             break
             time.sleep(3)
-    else:
-        print("Not a valid input please try again.")
-        pricing_toad(product, support, cust_name)
 
        
 def new_customer():
@@ -274,8 +268,7 @@ def hist_data():
             console.print("What would you like to do now?", style = "bold medium_purple", justify = "center")
             console.print("Type 'a' to check another customer.", style = "bold bright_white", justify = "center")
             console.print("Type 'b' to return to the main menu.", style = "bold bright_white", justify = "center")
-            console.print("Type 'c' to exit the renewal calculator", style = "bold bright_white", justify = "center")
-
+            
             selection = input(Fore.GREEN + Style.BRIGHT + "Enter your selection here:\n")
             selection = selection.lower()
 
@@ -283,12 +276,9 @@ def hist_data():
                 hist_data()
             elif selection == "b":
                 first_page()
-            elif selection == "c":
-                print(f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}\
-            \nThank you for using the calculator and goodbye.")
-            break
-            time.sleep(3)
-
+            else:
+                print("Incorect input, please try again")
+                hist_data()
     else:
         console = Console()
         time.sleep(2)
@@ -338,6 +328,7 @@ def first_page():
             break        
         else:
             console.print("Invalid input, try again .\n", style = "bright_yellow", justify= "center")
+            time.sleep(2)
             first_page()
 
             
